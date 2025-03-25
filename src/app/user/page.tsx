@@ -18,12 +18,13 @@ export default function User() {
   const [error, setError] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [personId, setPersonId] = useState<string>("");
-  
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const response = await getUsers(setLoading);
         setImages(response || []); // Ensure response structure matches expected data
+        setError(null); // ✅ Clear error state when successful
       } catch (error) {
         setError("Failed to load images");
       } finally {
@@ -32,7 +33,7 @@ export default function User() {
     };
 
     fetchImages();
-  });
+  },[]);
 
   return (
     <div className="min-h-screen  text-white p-6">
