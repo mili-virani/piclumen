@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Grid } from "lucide-react";
 import { getUsers } from "@/utils/api";
 import GalleryModal from "@/component/gallerymodelData";
@@ -19,24 +19,27 @@ export default function User() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [personId, setPersonId] = useState<string>("");
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const response = await getUsers(setLoading);
-        setImages(response || []); // Ensure response structure matches expected data
-        setError(null); // ✅ Clear error state when successful
-      } catch (error) {
-        setError("Failed to load images");
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Fetch images function using useCallback to prevent unnecessary re-renders
+  const fetchImages = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null); // Clear any previous errors
+      const response = await getUsers();
+      setImages(response || []); // Ensure response is an array
+    } catch (err) {
+      console.error("Error fetching images:", err);
+      setError("Failed to load images");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
+  useEffect(() => {
     fetchImages();
-  },[]);
+  }, [fetchImages]);
 
   return (
-    <div className="min-h-screen  text-white p-6">
+    <div className="min-h-screen text-white p-6">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8">User list</h1>
 
@@ -51,7 +54,7 @@ export default function User() {
         )}
 
         {/* Error State */}
-        {error && !loading && (
+        {error && (
           <div className="text-center py-12">
             <h3 className="text-xl font-semibold text-red-500">{error}</h3>
           </div>
@@ -68,6 +71,8 @@ export default function User() {
                 <Image
                   src={`http://68.183.93.60/py/face_recognization/${data.image}`}
                   alt={data.name}
+                  width={200}
+                  height={200}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 cursor-pointer"
                   onClick={() => {
                     setIsOpen(true);
@@ -80,7 +85,7 @@ export default function User() {
         )}
 
         {/* Empty State */}
-        {!loading && images.length === 0 && (
+        {!loading && !error && images.length === 0 && (
           <div className="text-center py-12">
             <Grid className="mx-auto h-12 w-12 text-gray-500 mb-4" />
             <h3 className="text-xl font-semibold text-gray-600">
@@ -89,6 +94,7 @@ export default function User() {
           </div>
         )}
 
+        {/* Gallery Modal */}
         {isOpen && (
           <GalleryModal
             isOpen={isOpen}
