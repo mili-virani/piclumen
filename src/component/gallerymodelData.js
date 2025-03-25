@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { getPersonGallery } from "@/utils/api";
-
+import Image from "next/image";
 
 export default function GalleryModal({ isOpen, setIsOpen, personId }) {
     const [selectedImage, setSelectedImage] = useState();
@@ -53,7 +53,7 @@ export default function GalleryModal({ isOpen, setIsOpen, personId }) {
                         <div className="flex items-center justify-center relative">
                             <button onClick={prevImage} className="absolute left-2 bg-gray-800 text-white p-2 rounded-full">&lt;</button>
 
-                            <img src={`http://68.183.93.60/py/face_recognization/${selectedImage?.photopath}`} alt={selectedImage?.image_id} className="w-full h-[70vh] object-contain rounded-lg shadow-lg" />
+                            <Image src={`http://68.183.93.60/py/face_recognization/${selectedImage?.photopath}`} alt={selectedImage?.image_id} className="w-full h-[70vh] object-contain rounded-lg shadow-lg" />
 
                             <button onClick={nextImage} className="absolute right-2 bg-gray-800 text-white p-2 rounded-full">&gt;</button>
                         </div>
@@ -61,7 +61,7 @@ export default function GalleryModal({ isOpen, setIsOpen, personId }) {
                         {/* Thumbnails */}
                         <div className="flex overflow-x-auto space-x-2 mt-4 px-4">
                             {images && images.map((img) => (
-                                <img
+                                <Image
                                     key={img?.image_id}
                                     src={`http://68.183.93.60/py/face_recognization/${img?.photopath}`}
                                     alt={img.image_id}

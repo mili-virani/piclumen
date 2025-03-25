@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Grid } from "lucide-react";
 import { getUsers } from "@/utils/api";
 import GalleryModal from "@/component/gallerymodelData";
+import Image from "next/image";
 
 interface ImageData {
   face_id: string;
@@ -31,7 +31,7 @@ export default function User() {
     };
 
     fetchImages();
-  }, []);
+  });
 
   return (
     <div className="min-h-screen  text-white p-6">
@@ -63,7 +63,7 @@ export default function User() {
                 key={data.face_id}
                 className="group relative bg-gray-100 rounded-lg overflow-hidden shadow-lg"
               >
-                <img
+                <Image
                   src={`http://68.183.93.60/py/face_recognization/${data.image}`}
                   alt={data.name}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 cursor-pointer"

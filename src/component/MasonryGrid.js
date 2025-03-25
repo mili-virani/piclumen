@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import { HiOutlineUpload } from "react-icons/hi";
-import { FaUser, FaTrash } from "react-icons/fa";
-import axios from "axios";
+import { FaTrash } from "react-icons/fa";
 import { Grid } from 'lucide-react';
 import { getIamges, recognizeImage, removeDuplicates } from '@/utils/api'
+import Image from "next/image";
+
 // const images = [
 //   {
 //     id: 1,
@@ -76,7 +77,7 @@ const MasonryGrid = () => {
   useEffect(() => {
 
     fetchImages();
-  }, []);
+  }, [fetchImages]);
 
   const openModal = (index) => {
     console.log("Opening modal for index:", index);
@@ -185,7 +186,7 @@ const MasonryGrid = () => {
           >
             {images.map((data, index) => (
               <div key={data.image_id} className="group relative mb-4 overflow-hidden rounded-lg shadow-lg ">
-                <img
+                <Image
                   src={`http://68.183.93.60/py/face_recognization/${data.photopath}`}
                   alt={data.image_id}
                   width={300} 
@@ -237,7 +238,7 @@ const MasonryGrid = () => {
                 &#10094;
               </button>
 
-              <img
+              <Image
                 src={`http://68.183.93.60/py/face_recognization/${images[currentImageIndex].photopath}`}
                 alt="Preview"
                 className="object-contain h-[100%] w-auto rounded-lg"
