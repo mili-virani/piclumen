@@ -1,6 +1,7 @@
 import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const LOGIN_ID = process.env.NEXT_PUBLIC_LOGIN_ID;
+// const LOGIN_ID = process.env.NEXT_PUBLIC_LOGIN_ID;
+const LOGIN_ID = "67dbd2bb85ece786b30652c2";
 
 export async function getIamges(setLoading) {
     try {
