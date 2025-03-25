@@ -4,7 +4,7 @@ const LOGIN_ID = process.env.NEXT_PUBLIC_LOGIN_ID;
 
 export async function getIamges(setLoading) {
     try {
-        const response = await axios.get(`${API_URL}/get_photos`, {
+        const response = await axios.get(`/get_photos`, {
             headers: { loginid: LOGIN_ID },
         });
 

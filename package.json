@@ -2,6 +2,7 @@
   "name": "piclumen-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://68.183.93.60:7979",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
