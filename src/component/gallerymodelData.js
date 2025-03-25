@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useCallback } from "react";
 import { Dialog } from "@headlessui/react";
 import { getPersonGallery } from "@/utils/api";
 import Image from "next/image";
@@ -7,7 +7,10 @@ export default function GalleryModal({ isOpen, setIsOpen, personId }) {
     const [selectedImage, setSelectedImage] = useState();
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
-    const fetchImages = async () => {
+
+    const fetchImages = useCallback(async () => {
+        if (!personId) return;
+    
         try {
             setLoading(true);
             const response = await getPersonGallery(personId);
@@ -23,12 +26,13 @@ export default function GalleryModal({ isOpen, setIsOpen, personId }) {
         } finally {
             setLoading(false);
         }
-    };
+    }, [personId]); // Dependencies: personId to avoid recreating the function unnecessarily
+    
     useEffect(() => {
-        if (isOpen && personId) {
+        if (isOpen) {
             fetchImages();
         }
-    }, [isOpen, personId]);
+    }, [isOpen, fetchImages]);
     const nextImage = () => {
         const currentIndex = images.findIndex((img) => img.image_id === selectedImage.image_id);
         setSelectedImage(images[(currentIndex + 1) % images.length]);

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useCallback} from "react";
 import Masonry from "react-masonry-css";
 import { HiOutlineUpload } from "react-icons/hi";
 import { FaTrash } from "react-icons/fa";
@@ -58,26 +58,26 @@ const MasonryGrid = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [removingDuplicates, setRemovingDuplicates] = useState(false);
-  const fetchImages = async () => {
+  const fetchImages = useCallback(async () => {
     try {
-      setLoading(true);
-      const response = await getIamges(setLoading)
+        setLoading(true);
+        const response = await getIamges(setLoading);
 
-      if (response && Array.isArray(response)) {
-        setImages(response || []); // Assuming response is an array of image URLs
-      } else {
-        setImages([])
-      }
+        if (response && Array.isArray(response)) {
+            setImages(response || []); // Assuming response is an array of image URLs
+        } else {
+            setImages([]);
+        }
     } catch (error) {
-      console.error("Error fetching images:", error);
+        console.error("Error fetching images:", error);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
-  useEffect(() => {
+}, []); // No dependencies since no dynamic values are used inside
 
+useEffect(() => {
     fetchImages();
-  }, [fetchImages]);
+}, [fetchImages]); 
 
   const openModal = (index) => {
     console.log("Opening modal for index:", index);
@@ -198,7 +198,7 @@ const MasonryGrid = () => {
 
                 <span className="absolute  left-2 bottom-2 hidden group-hover:block group-hover:p-2 group-hover:rounded-full ">
                   <div className="mt-3 flex -space-x-2 overflow-hidden">
-                    {data?.matched_faces?.map((face, key) => (<img className="inline-block h-[32px] w-[32px]  rounded-full border-2 border-white" src={`http://68.183.93.60/py/face_recognization/${face?.person_photo}`} alt="" key={key} />))}
+                    {data?.matched_faces?.map((face, key) => (<Image className="inline-block h-[32px] w-[32px]  rounded-full border-2 border-white" src={`http://68.183.93.60/py/face_recognization/${face?.person_photo}`} alt="" key={key} />))}
                   </div>
                 </span>
                 <span className="absolute  right-3 bottom-3 hidden group-hover:block group-hover:p-2.5 group-hover:rounded-full "><FaTrash /></span>
