@@ -3,8 +3,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "", // Requests to /api/get_photos
-        destination: "http://68.183.93.60:7979/", // Proxies to backend
+        source: "/get_photos", // Requests to /api/get_photos
+        destination: "http://68.183.93.60:7979/get_photos", // Proxies to backend
       },
     ];
   },
