@@ -1,0 +1,60 @@
+{
+    "images": [
+      {
+        "id": 1,
+        "title": "Mystical Phone Case",
+        "url": "https://images.unsplash.com/photo-1611117775350-ac3950990985",
+        "category": "technology",
+        "size": "normal"
+      },
+      {
+        "id": 2,
+        "title": "Neon Robot",
+        "url": "https://images.unsplash.com/photo-1535378917042-10a22c95931a",
+        "category": "art",
+        "size": "large"
+      },
+      {
+        "id": 3,
+        "title": "Space Explorer",
+        "url": "https://images.unsplash.com/photo-1446776877081-d282a0f896e2",
+        "category": "space",
+        "size": "wide"
+      },
+      {
+        "id": 4,
+        "title": "Electric Truck",
+        "url": "https://images.unsplash.com/photo-1620455800201-7f00aeef12ed",
+        "category": "vehicles",
+        "size": "normal"
+      },
+      {
+        "id": 5,
+        "title": "Mountain View",
+        "url": "https://images.unsplash.com/photo-1519681393784-d120267933ba",
+        "category": "nature",
+        "size": "wide"
+      },
+      {
+        "id": 6,
+        "title": "Anime Art",
+        "url": "https://images.unsplash.com/photo-1578632767115-351597cf2477",
+        "category": "art",
+        "size": "normal"
+      },
+      {
+        "id": 7,
+        "title": "Urban Wildlife",
+        "url": "https://images.unsplash.com/photo-1442689859438-97407280183f",
+        "category": "nature",
+        "size": "normal"
+      },
+      {
+        "id": 8,
+        "title": "FIFA 2025",
+        "url": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55",
+        "category": "sports",
+        "size": "large"
+      }
+    ]
+  }
